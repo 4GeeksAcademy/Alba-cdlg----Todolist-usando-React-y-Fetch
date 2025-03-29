@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import React { useState } from "react";
 
 //include images into your bundle
@@ -9,6 +9,27 @@ const Home = () => {
   const [inputValue, setInputValue] = useState("");
   const [todos, setTodos] = useState([]);
   const [hoverIndex, setHoverIndex] = useState(null);
+
+  const getTodos = () => {
+    fetch("https://playground.4geeks.com/todo/users/Alba-cdlg")
+      .then((response) => {
+        if (!response.ok) {
+          console.log("problemas al traer los datos");
+        } else return response.json();
+      })
+      .then((data) => {
+        console.log("estos son mis datos", data)
+        setTodos(data.todos);
+        console.log("este es mi estado", todos)
+      })
+      .catch((error) => {
+        console.error("problemas en el fetch");
+      });
+  };
+  useEffect(() => {
+    getTodos()
+  }, [])
+
 
   return (
     <div className="container">
@@ -35,7 +56,7 @@ const Home = () => {
             onMouseEnter={() => setHoverIndex(index)}
             onMouseLeave={() => setHoverIndex(null)}
           >
-            {item}{" "}
+            {item.label}{" "}
             {hoverIndex === index && (
               <i
                 className="bi bi-x"
