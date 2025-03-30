@@ -11,25 +11,24 @@ const Home = () => {
   const [hoverIndex, setHoverIndex] = useState(null);
 
   const getTodos = () => {
-    fetch("https://playground.4geeks.com/todo/users/Alba-cdlg")
+    fetch("https://playground.4geeks.com/todo/todos/Alba-cdlg")
       .then((response) => {
         if (!response.ok) {
           console.log("problemas al traer los datos");
         } else return response.json();
       })
       .then((data) => {
-        console.log("estos son mis datos", data)
+        console.log("estos son mis datos", data);
         setTodos(data.todos);
-        console.log("este es mi estado", todos)
+        console.log("este es mi estado", todos);
       })
       .catch((error) => {
         console.error("problemas en el fetch");
       });
   };
   useEffect(() => {
-    getTodos()
-  }, [])
-
+    getTodos();
+  }, []);
 
   return (
     <div className="container">
