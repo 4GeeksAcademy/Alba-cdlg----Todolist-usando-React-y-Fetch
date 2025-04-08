@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
 // import React { useState } from "react";
 
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
-
 //create your first component
 const Home = () => {
   const [inputValue, setInputValue] = useState("");
@@ -41,7 +38,11 @@ const Home = () => {
             value={inputValue}
             onKeyPress={(e) => {
               if (e.key === "Enter") {
-                setTodos(todos.concat([inputValue]));
+                const newTodo = {
+                  label: inputValue,
+                  done: false,
+                };
+                setTodos([...todos, newTodo]);
                 setInputValue("");
               }
             }}
